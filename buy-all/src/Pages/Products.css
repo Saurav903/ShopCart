@@ -1,0 +1,14 @@
+
+.first{
+    display:flexbox;
+    font-size: larger;
+    font-weight: 500;
+}
+.buttonh:hover{
+    color:rgb(17, 17, 17)
+}
+.databox{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 10px;
+    border-radius: 10px;
+}

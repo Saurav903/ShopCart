@@ -7,15 +7,18 @@ import { BrowserRouter } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 import { ColorModeScript } from '@chakra-ui/react';
 import theme from './theme'
+import AuthContextProvider from './Context/AuthContextProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <AuthContextProvider>
   <BrowserRouter>
   <ChakraProvider>
   <ColorModeScript initialColorMode={theme.config.initialColorMode} />
     <App />
     </ChakraProvider>
     </BrowserRouter>
+    </AuthContextProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
