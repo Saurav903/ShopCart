@@ -3,28 +3,30 @@ import {Box,SimpleGrid,Text,Button,Image,Link,Heading,useColorModeValue} from "@
 import {Link as LinkRoutes} from "react-router-dom";
 import CustomArrows from './Crousel';
 import Footer from './Footer';
+import { useContext } from 'react';
+import { AuthContext } from '../Context/AuthContextProvider';
 function Home() {
-
+    const {setcategoryGet} = useContext(AuthContext);
     const shopDetailData = 
     [
-        {img: "https://pisces.bbystatic.com/image2/BestBuy_US/dam/pol_6502179-MMT-569003-0808-ec85fc42-4049-476f-ad8a-ad9e94e5607b.jpg;maxWidth=220",text: "Laptops & Computers"},
-        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6502/6502215_sd.jpg;maxWidth=220",text:"TVs & Projectors"},
-        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/dam/MMT-611301-ghp-img-icons-apple-d28633c9-bbe5-4f83-a0f6-55b738306ae1.jpg;maxWidth=220",text:"Apple"},  
-        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6456/6456332_sd.jpg;maxWidth=220",text:"Video Games"},  
-        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6519/6519950_sd.jpg;maxWidth=220",text:"Cell Phones"},  
-        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/dam/MMT-606895-ghp-img-icons-mappls-2157cc1d-a86a-48d0-98a3-15110ca655c7.jpg;maxWidth=220",text:"Major Appliances"},  
-        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6505/6505727_sd.jpg;maxWidth=220",text:"Headphones"},  
-        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6500/6500695_rd.jpg;maxWidth=220",text:"PC Gaming"},  
-        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/dam/MMT-623320-ghp-img-icons-tablets-309e6e1b-379c-438d-b57c-7e6450a91e6e.jpg;maxWidth=220",text:"Tablets & E-Readers"},  
-        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6213/6213100_sd.jpg;maxWidth=220",text:"Cameras"},  
-        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6454/6454256_sd.jpg;maxWidth=220",text:"Sound Bars"},  
-        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6510/6510885_sd.jpg;maxWidth=220",text:"Wearable Technology"},  
-        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/dam/MMT-611301-ghp-img-icons-smappls-bfa220bd-fca3-447c-ab2e-3c88aaebea36.jpg;maxWidth=220",text:"Small Appliances"},  
-        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/dam/MMT-602732-ghp-img-icons-printers-4bdae295-d0ae-45df-a950-a2411f6c1637.jpg;maxWidth=220",text:"Printers, Home"},  
-        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6461/6461319_sd.jpg;maxWidth=220",text:"Smart Home, Security"},  
-        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/dam/MMT-611301-ghp-img-icons-toys-dbd5f58e-beb9-4ca2-8d48-3db5e29c5e63.jpg;maxWidth=220",text:"Toys, Games"},  
-        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6502/6502458_sd.jpg;maxWidth=220",text:"Electric Transportation"},  
-        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/dam/MMT-611301-ghp-img-icons-health-1c7229b6-26c8-44a1-94ea-62315c8c6a4b.jpg;maxWidth=220",text:"Health, Fitness"},                             
+        {img: "https://pisces.bbystatic.com/image2/BestBuy_US/dam/pol_6502179-MMT-569003-0808-ec85fc42-4049-476f-ad8a-ad9e94e5607b.jpg;maxWidth=220",text: "Laptops & Computers",category:"Laptops"},
+        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6502/6502215_sd.jpg;maxWidth=220",text:"TVs & Projectors",category:"TV"},
+        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/dam/MMT-611301-ghp-img-icons-apple-d28633c9-bbe5-4f83-a0f6-55b738306ae1.jpg;maxWidth=220",text:"Apple",category:"TV"},  
+        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6456/6456332_sd.jpg;maxWidth=220",text:"Video Games",category:"TV"},  
+        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6519/6519950_sd.jpg;maxWidth=220",text:"Cell Phones",category:"TV"},  
+        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/dam/MMT-606895-ghp-img-icons-mappls-2157cc1d-a86a-48d0-98a3-15110ca655c7.jpg;maxWidth=220",text:"Major Appliances",category:"TV"},  
+        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6505/6505727_sd.jpg;maxWidth=220",text:"Headphones",category:"TV"},  
+        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6500/6500695_rd.jpg;maxWidth=220",text:"PC Gaming",category:"TV"},  
+        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/dam/MMT-623320-ghp-img-icons-tablets-309e6e1b-379c-438d-b57c-7e6450a91e6e.jpg;maxWidth=220",text:"Tablets & E-Readers",category:"TV"},  
+        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6213/6213100_sd.jpg;maxWidth=220",text:"Cameras",category:"TV"},  
+        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6454/6454256_sd.jpg;maxWidth=220",text:"Sound Bars",category:"TV"},  
+        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6510/6510885_sd.jpg;maxWidth=220",text:"Wearable Technology",category:"TV"},  
+        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/dam/MMT-611301-ghp-img-icons-smappls-bfa220bd-fca3-447c-ab2e-3c88aaebea36.jpg;maxWidth=220",text:"Small Appliances",category:"TV"},  
+        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/dam/MMT-602732-ghp-img-icons-printers-4bdae295-d0ae-45df-a950-a2411f6c1637.jpg;maxWidth=220",text:"Printers, Home",category:"TV"},  
+        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6461/6461319_sd.jpg;maxWidth=220",text:"Smart Home, Security",category:"TV"},  
+        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/dam/MMT-611301-ghp-img-icons-toys-dbd5f58e-beb9-4ca2-8d48-3db5e29c5e63.jpg;maxWidth=220",text:"Toys, Games",category:"TV"},  
+        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6502/6502458_sd.jpg;maxWidth=220",text:"Electric Transportation",category:"TV"},  
+        {img:"https://pisces.bbystatic.com/image2/BestBuy_US/dam/MMT-611301-ghp-img-icons-health-1c7229b6-26c8-44a1-94ea-62315c8c6a4b.jpg;maxWidth=220",text:"Health, Fitness",category:"TV"},                             
     ]
   return (
     <>  <hr />
@@ -51,7 +53,7 @@ function Home() {
             <SimpleGrid columns={{sm: 1, lg: 6, "2xl": 6}} >
                 {shopDetailData.map((e)=>(
                     <Box width="100%" h="250px" display="grid" justifyContent="center" alignItems="center">
-                        <LinkRoutes to="/products"><Box bg="white" height="150px" width="150px" borderRadius="50%" border="3px solid #598bf7" display="grid" justifyContent="center" alignItems="center">
+                        <LinkRoutes to="/products"><Box onClick={()=>setcategoryGet(e.category)} bg="white" height="150px" width="150px" borderRadius="50%" border="3px solid #598bf7" display="grid" justifyContent="center" alignItems="center">
                                 <Image src={e.img} w="70px"></Image>
                         </Box>
                         <br />
