@@ -99,7 +99,7 @@ function Footer() {
                             <Box>
                                 <Text>Get the latest deals and more.</Text>
                                 <Input placeholder='email'/> 
-                                <Button bg="blue" color="white">SignUp</Button>
+                                <RouteLink to="/login"><Button bg="blue" color="white">SignUp</Button></RouteLink>
                             </Box>
                             <Box>
                                 <Text>BestBuy App</Text>

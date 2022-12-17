@@ -30,7 +30,7 @@ function Home() {
     ]
   return (
     <>  <hr />
-        <Box bg={useColorModeValue('blue', 'blue.400')} w='100%'  color='white' mt={145}>
+        <Box bg={useColorModeValue('blue', 'blue.400')} w='100%'  color='white' mt={122}>
             <SimpleGrid columns={{sm: 1, lg: 2}} spacing={5} >
                 <Box  height='280px' display="grid" justifyContent="center" alignItems="center">
                         <Text fontSize="80" fontWeight="900">
