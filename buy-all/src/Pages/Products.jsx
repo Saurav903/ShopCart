@@ -45,7 +45,7 @@ function Products() {
   return (
     <>
     <Box>
-        <Divider paddingTop={150}/>
+        <Divider paddingTop={130}/>
         <Breadcrumb spacing='8px' separator={<ChevronRightIcon color='gray.500' />}>
                 <BreadcrumbItem>
                     <BreadcrumbLink href='#'><RouteLink to="/">Home</RouteLink></BreadcrumbLink>
