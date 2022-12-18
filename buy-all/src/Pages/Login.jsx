@@ -12,7 +12,7 @@ import {
     Heading,
     Text,
     useColorModeValue,
-    Link,Checkbox,Tabs,TabList,Tab,TabPanels,TabPanel
+    Link,Checkbox,Tabs,TabList,Tab,TabPanels,TabPanel,useToast
   } from '@chakra-ui/react';
   import { useState, useEffect,useContext } from 'react';
   import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
@@ -31,6 +31,7 @@ import {
     const {setIsAuth,isAuth} = useContext(AuthContext);
     const [users,setUsers] = useState("");
     const navigate = useNavigate();
+    const toast = useToast();
     const getData = () =>{
       return axios.get(`https://server-cp.onrender.com/accounts`).then((res)=>setUsers(res.data)).catch((err)=>console.log(err));
     }
@@ -48,6 +49,13 @@ import {
       setLastName("");
       setFirstName("");
       getData();
+      toast({
+        title: 'SignUp Successfully',
+        description: "Login Now",
+        status: 'success',
+        duration: 4000,
+        isClosable: true,
+      })
     }
     useEffect(()=>{
       getData();
@@ -63,7 +71,13 @@ import {
           setIsAuth(true);
           console.log(true);
         }})
-        
+        toast({
+          title: 'Login Successfully',
+          description: "",
+          status: 'success',
+          duration: 4000,
+          isClosable: true,
+        })
     }
     if(isAuth){
       navigate("/cart");

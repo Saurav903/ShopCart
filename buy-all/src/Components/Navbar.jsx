@@ -2,17 +2,31 @@ import {
     Menu,
     MenuButton,
     MenuList,
-    MenuItem,Button,Image,Box,Text,Input,useColorMode,SimpleGrid,useColorModeValue
+    MenuItem,Button,Image,Box,Text,Input,useColorMode,SimpleGrid,useColorModeValue,useToast
   } from '@chakra-ui/react'
   import {HamburgerIcon,ChevronDownIcon} from "@chakra-ui/icons"
   import {Link} from "react-router-dom";
   import { BsFillCartCheckFill,BsSearch } from 'react-icons/bs';
   import {MdDarkMode} from "react-icons/md";
   import {CiLight} from "react-icons/ci";
+  import { AuthContext } from '../Context/AuthContextProvider';
+  
     import React from 'react'
 
  const Navbar = () => {
     const { colorMode, toggleColorMode } = useColorMode()
+    const {setIsAuth,isAuth} = React.useContext(AuthContext);
+    const toast = useToast();
+    const handleLogout = ()=>{
+        setIsAuth(false);
+        toast({
+            title: 'Logout Successfully',
+            description: "",
+            status: 'warning',
+            duration: 4000,
+            isClosable: true,
+          })
+    }
   return (
     <Box position="fixed" zIndex={2} bg={useColorModeValue('blue', 'blue.800')}>
     <Box width="100%" height="80px" bg={useColorModeValue('blue', 'blue.800')} display="flex" justifyContent="space-between">
@@ -62,7 +76,7 @@ import {
     </Box>
             <hr />
         <Box  w='100%' color='white' boxShadow='xl'>
-            <SimpleGrid columns={[1, 5, 7]} spacing={10}>
+            <SimpleGrid columns={[1, 5, 8]} spacing={10}>
                 <Box>
                     <Menu>
                             <MenuButton as={Button} rightIcon={<ChevronDownIcon />} color="white" bg="blue">
@@ -145,6 +159,11 @@ import {
                                 <MenuItem color="blue">Attend a Workshop</MenuItem>
                             </MenuList>
                     </Menu>
+                </Box>
+                <Box>
+                    <Button onClick={handleLogout} colorScheme='white'>
+                        {isAuth === true ? "Logout" : "Login first"}
+                    </Button>
                 </Box>
             </SimpleGrid>
         </Box>
