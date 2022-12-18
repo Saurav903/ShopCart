@@ -62,15 +62,15 @@ import {
     },[])
     
     const handleLoginData = (loginEmail,loginPassword,users)=>{
-        const userLogin = {
-          "email":loginEmail,
-          "password":loginPassword
+        for(let i=0; i<users.length; i++){
+          if(users[i].email === loginEmail && users[i].password === loginPassword){
+            setIsAuth(true);
+            console.log(true);
+            break;
+          }
         }
         
-        users.forEach((el)=>{if(el.email === userLogin.email && el.password === userLogin.password){
-          setIsAuth(true);
-          console.log(true);
-        }})
+        
         toast({
           title: 'Login Successfully',
           description: "",
