@@ -8,10 +8,33 @@ function Carts() {
     const [cartData,setCartData] = React.useState([]);
     const [loadingButton,setloadingButton] = React.useState(false);
     const [isLoading,setIsLoading] = React.useState(true);
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    const toast = useToast()
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const toast = useToast();
+
+    const emptyCart = (id)=>{
+        
+        axios.delete(`https://server-cp.onrender.com/cart/${id}`).then((res)=>setCartData([])).catch((err)=>console.log(err));
+    }
+    const handleCloseModal = (onClose)=>{
+        setloadingButton(true);
+        cartData.forEach((el)=>emptyCart(el.id))
+        setTimeout(()=>{
+            
+            toast({
+                title: 'Payment Successful.',
+                description: "Your Order Placed.",
+                status: 'success',
+                duration: 4000,
+                isClosable: true,
+              })
+            setloadingButton(false);
+            return  onClose();
+        },2000)
+        
+    }
     const handleData = ()=>{
         return axios.get(`https://server-cp.onrender.com/cart`).then((res)=>{setCartData(res.data);setIsLoading(false)}).catch((err)=>console.log(err));
+        
     }
     React.useEffect(()=>{
         handleData();
@@ -29,26 +52,7 @@ function Carts() {
     // console.log(cartData);
     const x = cartData.reduce((total,el)=>{return total + el.price},0);
     // setAmount(x);
-    const handleCloseModal = (onClose)=>{
-        setloadingButton(true);
-        setTimeout(()=>{
-            axios({
-                baseURL:`https://server-cp.onrender.com/cart`,
-                method: "delete"
-            });
-            handleData();
-            toast({
-                title: 'Payment Successful.',
-                description: "Your Order Placed.",
-                status: 'success',
-                duration: 4000,
-                isClosable: true,
-              })
-            setloadingButton(false);
-            return  onClose();
-        },2000)
-       
-    }
+    
   return (
     <Box paddingTop={135} w="97%" margin="auto">
         <Box display="flex" h="auto">
@@ -118,7 +122,7 @@ function Carts() {
                                 <CardFooter>
                                     <Box display="grid" w="100%" justifyContent="center" alignItems="center">
                                     <ButtonGroup >
-                                    <Button onClick={onOpen} variant='solid' color="white" bg="black" _hover={{backgroundColor:"white",color:"black"}} >
+                                    <Button onClick={onOpen} variant='solid' color="white" bg="black" _hover={{backgroundColor:"white",color:"black"}} size="lg">
                                         CheckOut
                                     </Button>
                                         <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose} scrollBehavior="inside">

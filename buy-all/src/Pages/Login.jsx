@@ -14,12 +14,61 @@ import {
     useColorModeValue,
     Link,Checkbox,Tabs,TabList,Tab,TabPanels,TabPanel
   } from '@chakra-ui/react';
-  import { useState } from 'react';
+  import { useState, useEffect,useContext } from 'react';
   import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-  
+  import axios from "axios";
+  import { AuthContext } from '../Context/AuthContextProvider';
+  import {useNavigate} from "react-router-dom";
+
   export default function Login() {
     const [showPassword, setShowPassword] = useState(false);
+    const [signUpEmail,setSignUpEmail] = useState("");
+    const [signUpPassword,setSignUpPassword] = useState("");
+    const [firstName,setFirstName] = useState("");
+    const [lastName,setLastName] = useState("");
+    const [loginEmail,setLoginEmail]= useState("");
+    const [loginPassword,setLoginPassword] = useState("");
+    const {setIsAuth,isAuth} = useContext(AuthContext);
+    const [users,setUsers] = useState("");
+    const navigate = useNavigate();
+    const getData = () =>{
+      return axios.get(`https://server-cp.onrender.com/accounts`).then((res)=>setUsers(res.data)).catch((err)=>console.log(err));
+    }
   
+  
+    const userSignUp = (signUpEmail,signUpPassword)=>{
+      const user = {
+        "id": Date.now() + signUpPassword,
+        "email":signUpEmail,
+        "password":signUpPassword
+      }
+      axios.post(`https://server-cp.onrender.com/accounts`,user);
+      setSignUpEmail("");
+      setSignUpPassword("");
+      setLastName("");
+      setFirstName("");
+      getData();
+    }
+    useEffect(()=>{
+      getData();
+    },[])
+    
+    const handleLoginData = (loginEmail,loginPassword,users)=>{
+        const userLogin = {
+          "email":loginEmail,
+          "password":loginPassword
+        }
+        
+        users.forEach((el)=>{if(el.email === userLogin.email && el.password === userLogin.password){
+          setIsAuth(true);
+          console.log(true);
+        }})
+        
+    }
+    if(isAuth){
+      navigate("/cart");
+    }
+    console.log(users);
     return (
         <>
         <Tabs variant='soft-rounded' colorScheme='green' paddingTop="150px" bg={useColorModeValue('blue', 'blue.400')}>
@@ -53,24 +102,24 @@ import {
                 <Box>
                   <FormControl id="firstName" isRequired>
                     <FormLabel>First Name</FormLabel>
-                    <Input type="text" />
+                    <Input value={firstName} onChange={(e)=>setFirstName(e.target.value)} type="text" />
                   </FormControl>
                 </Box>
                 <Box>
                   <FormControl id="lastName">
                     <FormLabel>Last Name</FormLabel>
-                    <Input type="text" />
+                    <Input value={lastName} onChange={(e)=>setLastName(e.target.value)} type="text" />
                   </FormControl>
                 </Box>
               </HStack>
               <FormControl id="email" isRequired>
                 <FormLabel>Email address</FormLabel>
-                <Input type="email" />
+                <Input onChange={(e)=>setSignUpEmail(e.target.value)} type="email" value={signUpEmail}/>
               </FormControl>
               <FormControl id="password" isRequired>
                 <FormLabel>Password</FormLabel>
                 <InputGroup>
-                  <Input type={showPassword ? 'text' : 'password'} />
+                  <Input onChange={(e)=>setSignUpPassword(e.target.value)} type={showPassword ? 'text' : 'password'} value={signUpPassword}/>
                   <InputRightElement h={'full'}>
                     <Button
                       variant={'ghost'}
@@ -84,6 +133,7 @@ import {
               </FormControl>
               <Stack spacing={10} pt={2}>
                 <Button
+                  onClick={()=>userSignUp(signUpEmail,signUpPassword)}
                   loadingText="Submitting"
                   size="lg"
                   bg={'blue.400'}
@@ -125,13 +175,13 @@ import {
           <Stack spacing={4}>
             <FormControl id="email">
               <FormLabel>Email address</FormLabel>
-              <Input type="email" />
+              <Input value={loginEmail} onChange={(e)=>setLoginEmail(e.target.value)} type="email" />
             </FormControl>
             <FormControl id="password">
               <FormLabel>Password</FormLabel>
-              <Input type="password" />
+              <Input value={loginPassword} onChange={(e)=>setLoginPassword(e.target.value)} type="password" />
             </FormControl>
-            <Stack spacing={10}>
+            <Stack  spacing={10}>
               <Stack
                 direction={{ base: 'column', sm: 'row' }}
                 align={'start'}
@@ -140,6 +190,7 @@ import {
                 <Link color={'blue.400'}>Forgot password?</Link>
               </Stack>
               <Button
+              onClick={()=>handleLoginData(loginEmail,loginPassword,users)}
                 bg={'blue.400'}
                 color={'white'}
                 _hover={{

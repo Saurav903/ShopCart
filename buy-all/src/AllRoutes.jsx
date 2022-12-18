@@ -1,5 +1,6 @@
 import React from 'react'
 import {Routes,Route} from "react-router-dom";
+import PrivateRoutes from './Components/PrivateRoutes';
 import Carts from './Pages/Carts';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
@@ -13,7 +14,7 @@ function AllRoutes() {
             <Route path="/products" element={<Products/>}></Route>
             <Route path="/login" element={<Login/>}></Route>
             <Route path="/products/:id" element={<SinglePage/>}></Route>
-            <Route path="/cart" element={<Carts/>}></Route>
+            <Route path="/cart" element={<PrivateRoutes><Carts/></PrivateRoutes>}></Route>
         </Routes>
     </>
   )
