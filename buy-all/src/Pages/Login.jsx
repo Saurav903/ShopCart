@@ -62,25 +62,26 @@ import {
     },[])
     
     const handleLoginData = (loginEmail,loginPassword,users)=>{
+        if(loginPassword.length <= 4){
+          return alert("Password must be greater then 5");
+        }
         for(let i=0; i<users.length; i++){
           if(users[i].email === loginEmail && users[i].password === loginPassword){
             setIsAuth(true);
-            console.log(true);
+            toast({
+              title: 'Login Successfully',
+              description: "",
+              status: 'success',
+              duration: 4000,
+              isClosable: true,
+            })
             break;
           }
         }
         
-        
-        toast({
-          title: 'Login Successfully',
-          description: "",
-          status: 'success',
-          duration: 4000,
-          isClosable: true,
-        })
     }
     if(isAuth){
-      navigate("/cart");
+      navigate("/");
     }
     console.log(users);
     return (
@@ -128,12 +129,12 @@ import {
               </HStack>
               <FormControl id="email" isRequired>
                 <FormLabel>Email address</FormLabel>
-                <Input onChange={(e)=>setSignUpEmail(e.target.value)} type="email" value={signUpEmail}/>
+                <Input onChange={(e)=>setSignUpEmail(e.target.value)} type="email" value={signUpEmail} />
               </FormControl>
               <FormControl id="password" isRequired>
                 <FormLabel>Password</FormLabel>
                 <InputGroup>
-                  <Input onChange={(e)=>setSignUpPassword(e.target.value)} type={showPassword ? 'text' : 'password'} value={signUpPassword}/>
+                  <Input onChange={(e)=>setSignUpPassword(e.target.value)} type={showPassword ? 'text' : 'password'} value={signUpPassword} required minlength="4" maxlength="9"/>
                   <InputRightElement h={'full'}>
                     <Button
                       variant={'ghost'}
@@ -187,13 +188,13 @@ import {
           boxShadow={'lg'}
           p={8}>
           <Stack spacing={4}>
-            <FormControl id="email">
+            <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
               <Input value={loginEmail} onChange={(e)=>setLoginEmail(e.target.value)} type="email" />
             </FormControl>
-            <FormControl id="password">
+            <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
-              <Input value={loginPassword} onChange={(e)=>setLoginPassword(e.target.value)} type="password" />
+              <Input value={loginPassword} onChange={(e)=>setLoginPassword(e.target.value)} type="password" required minlength="4" maxlength="9"/>
             </FormControl>
             <Stack  spacing={10}>
               <Stack

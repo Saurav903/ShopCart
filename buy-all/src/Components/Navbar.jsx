@@ -41,7 +41,7 @@ import {
                 </div>
                 <div style={{display:"flex",alignItems:"center",justifyContent:"space-around"}}>
                         <Menu>
-                        <MenuButton as={Button} leftIcon={<HamburgerIcon fontSize='30px'/>} bg="blue" color="white"  fontSize='20px' >
+                        <MenuButton as={Button} leftIcon={<HamburgerIcon fontSize='30px'/>} bg="blue" color="white"  fontSize='20px' _hover={{color:"black" ,bg:"white"}}>
                             <Text>Menu</Text>
                         </MenuButton>
                         <MenuList>
@@ -68,7 +68,7 @@ import {
         </div>
         <div style={{width:"30%",display:"flex",alignItems:"center",justifyContent:"space-around"}}>
             <Link to="/cart"><button style={{border:"none",color:"white",cursor:"pointer",display:"flex",alignItems:"center"}}><BsFillCartCheckFill fontSize={30}/><Text color="white" fontWeight="800" fontSize="20">Cart</Text></button></Link>
-            <Button colorScheme='blue'><Link to="/login">Login/SignUp</Link></Button>
+            <Link to="/login"><Button  colorScheme='blue' >Login/SignUp</Button></Link>
             <Button onClick={toggleColorMode}>
                   {colorMode === 'light' ? <MdDarkMode/> : <CiLight/>}
             </Button>
@@ -79,7 +79,7 @@ import {
             <SimpleGrid columns={[1, 5, 8]} spacing={10}>
                 <Box>
                     <Menu>
-                            <MenuButton as={Button} rightIcon={<ChevronDownIcon />} color="white" bg="blue">
+                            <MenuButton as={Button} rightIcon={<ChevronDownIcon />} color="white" bg="blue" _hover={{color:"black" ,bg:"white"}}>
                                 Holiday Deals
                             </MenuButton>
                             <MenuList >
@@ -104,7 +104,7 @@ import {
                 </Box>
                 <Box>
                     <Menu>
-                            <MenuButton as={Button} rightIcon={<ChevronDownIcon />} color="white" bg="blue">
+                            <MenuButton as={Button} rightIcon={<ChevronDownIcon />} color="white" bg="blue" _hover={{color:"black" ,bg:"white"}}>
                                 More
                             </MenuButton>
                             <MenuList>
@@ -118,7 +118,7 @@ import {
                 </Box>
                 <Box>
                     <Menu>
-                            <MenuButton as={Button} rightIcon={<ChevronDownIcon />} color="white" bg="blue">
+                            <MenuButton as={Button} rightIcon={<ChevronDownIcon />} color="white" bg="blue" _hover={{color:"black" ,bg:"white"}}>
                                 Recently Viewed
                             </MenuButton>
                             <MenuList>
@@ -133,7 +133,7 @@ import {
                 
                 <Box>
                     <Menu>
-                            <MenuButton as={Button} rightIcon={<ChevronDownIcon />} color="white" bg="blue">
+                            <MenuButton as={Button} rightIcon={<ChevronDownIcon />} color="white" bg="blue" _hover={{color:"black" ,bg:"white"}}>
                                 Order Status
                             </MenuButton>
                             <MenuList>
@@ -148,7 +148,7 @@ import {
                
                 <Box>
                     <Menu>
-                            <MenuButton as={Button} rightIcon={<ChevronDownIcon />} color="white" bg="blue">
+                            <MenuButton as={Button} rightIcon={<ChevronDownIcon />} color="white" bg="blue" _hover={{color:"black" ,bg:"white"}}>
                                 Saved Item
                             </MenuButton>
                             <MenuList>
@@ -161,7 +161,7 @@ import {
                     </Menu>
                 </Box>
                 <Box>
-                    <Button onClick={handleLogout} colorScheme='white'>
+                    <Button onClick={handleLogout} colorScheme='white' variant="link" mt="8px">
                         {isAuth === true ? "Logout" : "Login first"}
                     </Button>
                 </Box>

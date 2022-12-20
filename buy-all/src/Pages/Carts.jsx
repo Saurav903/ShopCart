@@ -1,9 +1,10 @@
 import React from 'react'
-import {Box,Card,CardBody,Image,Stack,Heading,Text,Divider,CardFooter,ButtonGroup,Button,Select,Skeleton,useDisclosure,Modal,ModalOverlay,ModalContent,ModalHeader,ModalCloseButton,ModalBody,ModalFooter,FormControl,FormLabel,Input,Tabs,TabList,Tab,TabPanels,TabPanel,useToast} from "@chakra-ui/react";
-import {SmallCloseIcon} from "@chakra-ui/icons";
+import {Box,Card,CardBody,Image,Stack,Heading,Text,Divider,CardFooter,ButtonGroup,Button,Select,Skeleton,useDisclosure,Modal,ModalOverlay,ModalContent,ModalHeader,ModalCloseButton,ModalBody,ModalFooter,FormControl,FormLabel,Input,Tabs,TabList,Tab,TabPanels,TabPanel,useToast,Breadcrumb,BreadcrumbItem,BreadcrumbLink} from "@chakra-ui/react";
+import {SmallCloseIcon,ChevronRightIcon} from "@chakra-ui/icons";
 import axios from 'axios';
 import Footer from './Footer';
 import { MdDeliveryDining } from "react-icons/md";
+import {Link as RouteLink} from "react-router-dom";
 function Carts() {
     const [cartData,setCartData] = React.useState([]);
     const [loadingButton,setloadingButton] = React.useState(false);
@@ -52,9 +53,24 @@ function Carts() {
     // console.log(cartData);
     const x = cartData.reduce((total,el)=>{return total + el.price},0);
     // setAmount(x);
-    
+    let y = x.toFixed();
   return (
     <Box paddingTop={135} w="97%" margin="auto">
+        <Box>
+        <Breadcrumb spacing='8px' separator={<ChevronRightIcon color='gray.500' />}>
+                <BreadcrumbItem>
+                    <BreadcrumbLink href='#'><RouteLink to="/">Home</RouteLink></BreadcrumbLink>
+                </BreadcrumbItem>
+
+                <BreadcrumbItem>
+                    <BreadcrumbLink href='#'><RouteLink to="/products">Category</RouteLink></BreadcrumbLink>
+                </BreadcrumbItem>
+
+                <BreadcrumbItem>
+                    <BreadcrumbLink href='#'><RouteLink to="/products">Product details</RouteLink></BreadcrumbLink>
+                </BreadcrumbItem>
+        </Breadcrumb>
+        </Box>
         <Box display="flex" h="auto">
             <Box flex="7">
             {isLoading && <Box display="grid" gap={5}><Skeleton height='50px' w="90%" margin="auto"/><Skeleton height='50px' w="90%" margin="auto"/><Skeleton height='50px' w="90%" margin="auto"/><Skeleton height='50px' w="90%" margin="auto"/><Skeleton height='50px' w="90%" margin="auto"/><Skeleton height='50px' w="90%" margin="auto"/><Skeleton height='50px' w="90%" margin="auto"/></Box>}
@@ -113,7 +129,7 @@ function Carts() {
                                         Total Amount
                                     </Text>
                                     <Text color='blue.600' fontSize='2xl'>
-                                        ${x}
+                                        ${y}
                                     </Text>
                                     </Box>
                                     </Stack>
@@ -128,7 +144,7 @@ function Carts() {
                                         <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose} scrollBehavior="inside">
                                             <ModalOverlay />
                                             <ModalContent>
-                                            <ModalHeader>Modal Title</ModalHeader>
+                                            <ModalHeader>Address & Payment</ModalHeader>
                                             <ModalCloseButton />
                                             <ModalBody>
                                                 <FormControl>
@@ -146,7 +162,7 @@ function Carts() {
                                                             <Tabs>
                                                                 <TabList>
                                                                     <Tab>Cash on Delivery</Tab>
-                                                                    <Tab>Paypal</Tab>
+                                                                    <Tab>UPI</Tab>
                                                                     <Tab>Online</Tab>
                                                                 </TabList>
 
@@ -155,14 +171,14 @@ function Carts() {
                                                                     <p>Proceed cash on delivery! <MdDeliveryDining/></p>
                                                                     </TabPanel>
                                                                     <TabPanel>
-                                                                    <Input type='number' placeholder='Paypal ID'/>
+                                                                    <Input type='number' placeholder='upi@id'/>
                                                                     <Button color="white" bg="green.300">Check</Button>
                                                                     </TabPanel>
                                                                     <TabPanel>
                                                                     <FormLabel>Card Number</FormLabel>
                                                                     <Input type='number' placeholder='Card Number'/>
                                                                     <FormLabel>expiry date</FormLabel>
-                                                                    <Input htmlSize={3} type='number' placeholder='Card Number'/>
+                                                                    <Input htmlSize={3} type='number' placeholder='__/__'/>
                                                                     <Text textAlign="center" color="gray.500">OR</Text>
                                                                     <Input type='number' placeholder='Enter ETH Token'/>
                                                                     <Button color="white" bg="red.300">Check</Button>
